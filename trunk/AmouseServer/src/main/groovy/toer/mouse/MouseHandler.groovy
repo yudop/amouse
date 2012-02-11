@@ -7,7 +7,7 @@ import toer.Utils
 /**
  * Created by te - Date: 2/26/11
  */
-static class MouseHandler {
+class MouseHandler {
 
     static Robot robot
     static int currentX, currentY
