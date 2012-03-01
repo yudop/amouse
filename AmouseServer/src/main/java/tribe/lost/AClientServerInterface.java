@@ -24,6 +24,8 @@ public interface AClientServerInterface {
         int PREV = 3;
         int VOL_UP = 4;
         int VOL_DOWN = 5;
+        int START = 6;
+        int STOP = 7;
     }
 
     interface VLC {
@@ -37,5 +39,7 @@ public interface AClientServerInterface {
     interface WIZMO {
         int SHUTDOWN = 0;
         int RESTART = 1;
+        int HIBERNATE = 2;
+        int SCREEN_SAVER = 3;
     }
 }

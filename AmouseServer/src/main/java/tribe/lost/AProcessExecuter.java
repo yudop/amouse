@@ -32,6 +32,11 @@ public class AProcessExecuter {
             while ((line = stdInput.readLine()) != null) {
                 response = response + line + "\n";
             }
+            //try {
+            //    p.exitValue();
+            //} catch (InterruptedException e) {
+            //    return "InterruptedException " + e.getMessage();
+            //}
         } catch (IOException e) {
             return "IOEXception " + e.getMessage();
         }
