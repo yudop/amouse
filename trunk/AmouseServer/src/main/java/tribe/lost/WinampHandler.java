@@ -9,6 +9,7 @@ import static tribe.lost.AClientServerInterface.*;
 public class WinampHandler {
 
     interface WINAMP {
+        String START = "C:\\home\\Program\\winamp\\winamp.exe";
         String EXE = "clever.exe";
         String PLAY = "play";
         String PAUSE = "pause";
@@ -18,32 +19,46 @@ public class WinampHandler {
         String VOL_DOWN = "voldn";
     }
 
-    public static void handle(String[] commands) {
-        for (int k = 1; k < commands.length; k++) {
-            int command = Integer.valueOf(commands[k]);
-            switch (command) {
-                case Winamp.PLAY:
-                    AProcessExecuter.execute(WINAMP.EXE, WINAMP.PLAY);
-                    break;
-                case Winamp.PAUSE:
-                    AProcessExecuter.execute(WINAMP.EXE, WINAMP.PAUSE);
-                    break;
-                case Winamp.NEXT:
-                    AProcessExecuter.execute(WINAMP.EXE, WINAMP.NEXT);
-                    break;
-                case Winamp.PREV:
-                    AProcessExecuter.execute(WINAMP.EXE, WINAMP.PREV);
-                    break;
-                case Winamp.VOL_UP:
-                    AProcessExecuter.execute(WINAMP.EXE, WINAMP.VOL_UP);
-                    break;
-                case Winamp.VOL_DOWN:
-                    AProcessExecuter.execute(WINAMP.EXE, WINAMP.VOL_DOWN);
-                    break;
-            }
+    public static String handle(String[] commands) {
+
+        int command = -1;
+        try {
+            command = Integer.valueOf(commands[1]);
+        } catch (NumberFormatException e) {
+            System.out.println("NumberFormatException " + e.getMessage());
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("ArrayIndexOutOfBoundsException " + e.getMessage());
         }
+        switch (command) {
+            case Winamp.START:
 
+                return AProcessExecuter.execute(WINAMP.START);
+            case Winamp.PLAY:
+                AProcessExecuter.execute(WINAMP.EXE, WINAMP.PLAY);
+                return WINAMP.PLAY;
 
+            case Winamp.STOP:
+            case Winamp.PAUSE:
+                AProcessExecuter.execute(WINAMP.EXE, WINAMP.PAUSE);
+                return WINAMP.PAUSE;
+
+            case Winamp.NEXT:
+                AProcessExecuter.execute(WINAMP.EXE, WINAMP.NEXT);
+                return WINAMP.NEXT;
+
+            case Winamp.PREV:
+                AProcessExecuter.execute(WINAMP.EXE, WINAMP.PREV);
+                return WINAMP.PREV;
+
+            case Winamp.VOL_UP:
+                AProcessExecuter.execute(WINAMP.EXE, WINAMP.VOL_UP);
+                return WINAMP.VOL_UP;
+
+            case Winamp.VOL_DOWN:
+                AProcessExecuter.execute(WINAMP.EXE, WINAMP.VOL_DOWN);
+                return WINAMP.VOL_DOWN;
+            default:
+                return "unknown command " + command;
+        }
     }
-
 }

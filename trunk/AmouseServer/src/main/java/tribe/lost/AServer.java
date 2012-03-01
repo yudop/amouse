@@ -1,5 +1,6 @@
 package tribe.lost;
 
+import sun.java2d.pipe.BufferedTextPipe;
 import toer.ss.MouseHandler;
 
 import java.io.IOException;
@@ -19,7 +20,8 @@ public class AServer {
     private static String SERVER_ERROR = "SERVER ERROR: ";
 
     private DatagramSocket datagramSocket;
-    private DatagramPacket datagramPacket;
+    private final DatagramPacket datagramPacketIncoming;
+
     private String state;
 
     public AServer(int port) {
@@ -29,9 +31,10 @@ public class AServer {
             System.err.println(SERVER_ERROR + e.getMessage());
             System.exit(-1);
         }
+        KeyPressHandler.init();
 
-        byte[] buf = new byte[AClientServerInterface.PACKET_LENGTH];
-        datagramPacket = new DatagramPacket(buf, buf.length);
+        byte[] buffer = new byte[AClientServerInterface.PACKET_LENGTH];
+        datagramPacketIncoming = new DatagramPacket(buffer, buffer.length);
         System.out.println("waiting for data on port " + port);
         receive();
     }
@@ -40,46 +43,57 @@ public class AServer {
     public void receive() {
 
         try {
-            datagramSocket.receive(datagramPacket);
+            datagramSocket.receive(datagramPacketIncoming);
         } catch (IOException e) {
             System.err.println(e.getClass().getSimpleName() + " " + e.getMessage());
         }
 
-        String data = new String(datagramPacket.getData());
-        String payload = data.substring(0, datagramPacket.getLength());
+        String data = new String(datagramPacketIncoming.getData());
+        String payload = data.substring(0, datagramPacketIncoming.getLength());
         System.out.println("payload received: " + payload);
 
-        executeCommands(payload);
-
-        String response = "executed " + payload;
+        String response = executeCommands(payload);
+        System.out.println("executed " + response);
         sendResponse(response);
 
         receive();
     }
 
-    private void executeCommands(String payload) {
+    private String executeCommands(String payload) {
         String[] commands = payload.split(AClientServerInterface.TOP_COMMAND_DELIMITER);
-
+        String response = "unknown command";
         for (String command : commands) {
             String[] subCommands = command.split(AClientServerInterface.SUB_COMMAND_DELIMITER);
             if (AClientServerInterface.STATE_KEY_PRESS.equals(subCommands[0])) {
 
-
+                try {
+                    char[] keys = subCommands[1].toCharArray();
+                    response = KeyPressHandler.handle(keys);
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    System.out.println("ArrayIndexOutOfBoundsException " + e.getMessage());
+                }
             }
 
             if (AClientServerInterface.STATE_WINAMP.equals(subCommands[0])) {
-                WinampHandler.handle(subCommands);
+                response = WinampHandler.handle(subCommands);
             }
             if (AClientServerInterface.STATE_VLC.equals(subCommands[0])) {
 
 
             }
+            if (AClientServerInterface.STATE_WIZMO.equals(subCommands[0])) {
+                response = WizmoHandler.handle(subCommands);
+
+            }
         }
+        return response;
     }
 
     private void sendResponse(String response) {
         byte[] buffer = response.getBytes();
-        datagramPacket.setData(buffer);
+        DatagramPacket datagramPacket = new DatagramPacket(buffer, buffer.length);
+        datagramPacket.setAddress(datagramPacketIncoming.getAddress());
+        datagramPacket.setPort(datagramPacketIncoming.getPort());
         try {
             datagramSocket.send(datagramPacket);
         } catch (IOException e) {

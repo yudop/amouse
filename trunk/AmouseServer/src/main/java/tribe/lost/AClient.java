@@ -75,8 +75,12 @@ public class AClient {
 
         AClient.connect("127.0.0.1", port);
         AClient.sendPayload("testing");
-        AClient.sendPayload("testing 2");
+        AClient.sendPayload("WINAMP;;6");
         AClient.sendPayload("WINAMP;;0");
+        AClient.sendPayload("WIZMO;;3");
+        //AClient.sendPayload(AClientServerInterface.STATE_KEY_PRESS+AClientServerInterface.SUB_COMMAND_DELIMITER+"abba.,@ab");
+        //AClient.receiveResponse();
+        AClient.receiveResponse();
         AClient.receiveResponse();
         AClient.receiveResponse();
         AClient.receiveResponse();
@@ -84,7 +88,7 @@ public class AClient {
     }
 }
 
-/*
+/*                                                                               abba.,♦ab
 byte[] rbuffer = new byte[64];
 
 DatagramPacket rPacket =new DatagramPacket(rbuffer, rbuffer.length);
