@@ -69,8 +69,8 @@ public class KeyPressHandler {
                         break;
                     case 'e':
                     case 'E':
-                        robot.keyPress(KeyEvent.VK_A);
-                        robot.keyRelease(KeyEvent.VK_A);
+                        robot.keyPress(KeyEvent.VK_E);
+                        robot.keyRelease(KeyEvent.VK_E);
                         break;
                     case 'f':
                     case 'F':
