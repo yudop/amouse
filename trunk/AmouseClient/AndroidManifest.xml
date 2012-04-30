@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-      package="toer.ss.activity"
+      package="tribe.lost"
       android:versionCode="1"
       android:versionName="1.0">
-    <application android:label="AndroidSSCommander" android:icon="@drawable/icon">
-        <activity android:name="HomeActivity"
+    <application android:label="AClient" android:icon="@drawable/icon" android:name="AApplication">
+        <activity android:name="MainActivity" android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"   android:windowSoftInputMode="adjustPan"
                   android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -13,5 +13,5 @@
         </activity>
     </application>
 
-    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+    <uses-permission android:name="android.permission.INTERNET" />
 </manifest> 

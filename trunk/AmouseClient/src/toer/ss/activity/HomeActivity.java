@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.TextView;
 import toer.ss.client.DatagramClient;
 import toer.ss.client.Commands;
+import tribe.lost.R;
 
 public class HomeActivity extends Activity {
 
