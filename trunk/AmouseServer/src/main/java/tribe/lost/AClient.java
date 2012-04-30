@@ -65,6 +65,7 @@ public class AClient {
     public static void closeConnection() {
         System.out.println("closing connection");
         datagramSocket.close();
+        System.exit(1);
     }
 
     public static void main(String[] args) {
@@ -74,16 +75,44 @@ public class AClient {
         }
 
         AClient.connect("127.0.0.1", port);
+
+
+        Thread receiver = new Thread(new Runnable() {
+            public void run() {
+                while (true) {
+                    System.out.println("waiting for response... ");
+                    AClient.receiveResponse();
+                }
+            }
+        });
+        receiver.start();
+
+
         AClient.sendPayload("testing");
-        AClient.sendPayload("WINAMP;;6");
-        AClient.sendPayload("WINAMP;;0");
+        //AClient.sendPayload("WINAMP;;6");
+        //AClient.sendPayload("WINAMP;;0");
         AClient.sendPayload("WIZMO;;3");
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
+        AClient.sendPayload("MOUSE_CLICK;;2");
+        AClient.sendPayload("MOUSE_CLICK;;3");
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
+        AClient.sendPayload("MOUSE_MOVE;;300;;0");
+
         //AClient.sendPayload(AClientServerInterface.STATE_KEY_PRESS+AClientServerInterface.SUB_COMMAND_DELIMITER+"abba.,@ab");
         //AClient.receiveResponse();
-        AClient.receiveResponse();
-        AClient.receiveResponse();
-        AClient.receiveResponse();
-        AClient.receiveResponse();
+        try {
+            Thread.sleep(10000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
         AClient.closeConnection();
     }
 }
