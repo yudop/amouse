@@ -17,6 +17,30 @@ public class DatagramClient implements Runnable {
     public BlockingQueue<String> commands = new LinkedBlockingQueue<String>();
     private static DatagramSocket datagramSocket;
     private static InetAddress inetAddress;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     public static void connect() throws IOException {
         Log.d(TAG, "connecting");
 
