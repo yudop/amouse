@@ -32,7 +32,6 @@ public class MouseHandler {
 
     public static Point currentMousePosition() {
         PointerInfo pointerInfo = MouseInfo.getPointerInfo();
-
         return pointerInfo.getLocation();
     }
 
@@ -83,5 +82,6 @@ public class MouseHandler {
             return "failed";
         }
     }
+
 
 }
