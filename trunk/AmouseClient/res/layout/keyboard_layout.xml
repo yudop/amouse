@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent" android:orientation="vertical" android:layout_margin="10dip">
+    <include layout="@layout/header" />
+    <LinearLayout android:layout_height="wrap_content" android:layout_width="match_parent"
+                  android:weightSum="2" android:background="#ff112233" android:layout_marginBottom="10dip"
+            >
+        <TextView android:id="@+id/status" android:layout_height="wrap_content" android:layout_width="wrap_content"
+                  android:lines="1" android:maxLines="1"
+                  android:text="STATUS:" android:textColor="#ffffffff" android:textStyle="bold"
+                  android:gravity="left" android:padding="6dip" />
+
+        <TextView android:id="@+id/statusText"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:text="playing ... "
+                  android:gravity="left"
+                  android:padding="6dip"
+                  android:textColor="#ffffffff"
+                />
+
+    </LinearLayout>
+    <AutoCompleteTextView  android:layout_width="fill_parent" android:gravity="top" android:id="@+id/keyView"
+                           android:layout_height="100dip" android:text="dddd" android:inputType="text" />
+
+</LinearLayout>

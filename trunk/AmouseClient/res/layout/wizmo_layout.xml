@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent" android:orientation="vertical">
+
+    <include layout="@layout/header" android:id="@+id/header_wizmo"/>
+    <LinearLayout
+                  android:layout_width="fill_parent"
+                  android:layout_height="fill_parent" android:orientation="vertical">
+        <Button android:id="@+id/shutdownButton" android:layout_height="1dip" android:layout_weight="1"
+                android:layout_width="match_parent" android:background="@drawable/radio_pager"
+                android:text="SHUTDOWN"/>
+        <Button android:id="@+id/hibernateButton" android:layout_height="1dip" android:layout_weight="1"
+                android:layout_width="match_parent" android:background="@drawable/radio_pager"
+                android:text="HIBERNATE"/>
+        <Button android:id="@+id/restartButton" android:layout_height="1dip" android:layout_weight="1"
+                android:layout_width="match_parent" android:background="@drawable/radio_pager"
+                android:text="RESTART"/>
+        <Button android:id="@+id/screensaverButton" android:layout_height="1dip" android:layout_weight="1"
+                android:layout_width="match_parent"  android:background="@drawable/radio_pager"
+                android:text="SCREENSAVER"/>
+    </LinearLayout>
+
+
+</LinearLayout>

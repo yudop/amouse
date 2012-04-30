@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent" android:orientation="vertical" android:layout_margin="10dip">
+
+
+    <TextView android:layout_height="wrap_content" android:layout_width="match_parent" android:text="MUSIC REMOTE"
+              android:gravity="center" android:textSize="24sp" android:background="#ffff0000" android:layout_weight="1"
+              android:layout_marginBottom="10dip" android:textColor="#ffffffff" android:textStyle="bold"/>
+
+    <LinearLayout android:layout_height="wrap_content" android:layout_width="match_parent"
+                  android:weightSum="2" android:background="#ff112233" android:layout_marginBottom="10dip"
+            >
+        <TextView android:id="@+id/status" android:layout_height="wrap_content" android:layout_width="wrap_content"
+                  android:lines="1" android:maxLines="1"
+                  android:text="STATUS:" android:textColor="#ffffffff" android:textStyle="bold"
+                  android:gravity="left" android:padding="6dip" />
+
+        <TextView android:id="@+id/statusText"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:text="playing ... "
+                  android:gravity="left"
+                  android:padding="6dip"
+                  android:textColor="#ffffffff"
+                />
+
+    </LinearLayout>
+
+    <LinearLayout android:layout_height="wrap_content" android:layout_width="match_parent"
+                  android:layout_weight="1" android:weightSum="2"
+            >
+        <Button android:id="@+id/startStopButton" android:layout_height="match_parent" android:layout_width="1dip"
+                android:text="START/STOP" android:layout_weight="1" android:background="@drawable/radio_pager"/>
+        <Button android:id="@+id/playPauseButton" android:layout_height="match_parent" android:layout_width="1dip"
+                android:text="PLAY/PAUSE" android:layout_weight="1" android:background="@drawable/radio_pager"/>
+    </LinearLayout>
+
+    <LinearLayout android:layout_height="wrap_content" android:layout_width="match_parent" android:weightSum="2"
+                  android:layout_weight="1"
+            >
+        <Button android:id="@+id/prevButton" android:layout_height="match_parent" android:layout_width="1dip"
+                android:text="PREV" android:layout_weight="1" android:background="@drawable/radio_pager"/>
+        <Button android:id="@+id/nextButton" android:layout_height="match_parent" android:layout_width="1dip"
+                android:text="NEXT" android:layout_weight="1" android:background="@drawable/radio_pager"/>
+    </LinearLayout>
+
+    <LinearLayout android:layout_height="wrap_content" android:layout_width="match_parent" android:weightSum="2"
+                  android:layout_weight="1"
+            >
+        <Button android:id="@+id/volUpButton" android:layout_height="match_parent" android:layout_width="1dip"
+                android:text="VOL UP" android:layout_weight="1" android:background="@drawable/radio_pager"/>
+        <Button android:id="@+id/volDownButton" android:layout_height="match_parent" android:layout_width="1dip"
+                android:text="VOL DOWN" android:layout_weight="1" android:background="@drawable/radio_pager"/>
+    </LinearLayout>
+
+</LinearLayout>
