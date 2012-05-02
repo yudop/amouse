@@ -16,6 +16,13 @@ public class AClient {
     private static InetAddress inetAddress;
     private static int port;
 
+
+    public static void connectIfNotConnected(String ipAddress, int port) {
+        if (datagramSocket == null || !datagramSocket.isConnected()) {
+            connect(ipAddress, port);
+        }
+    }
+
     public static void connect(String ipAddress, int port) {
         System.out.println("connecting to port " + port);
         AClient.port = port;
@@ -42,22 +49,26 @@ public class AClient {
         byte[] buffer = payload.getBytes();
         DatagramPacket datagramPacket = new DatagramPacket(buffer, buffer.length, inetAddress, port);
         try {
-            datagramSocket.send(datagramPacket);
+
+                datagramSocket.send(datagramPacket);
+
         } catch (IOException e) {
             System.err.println(e.getClass().getSimpleName() + " " + e.getMessage());
             System.exit(-1);
         }
     }
 
-    public static String receiveResponse() {
+    public static String receiveResponse() throws IOException {
         byte[] buf = new byte[AClientServerInterface.PACKET_LENGTH];
         DatagramPacket datagramPacket = new DatagramPacket(buf, buf.length);
 
-        try {
-            datagramSocket.receive(datagramPacket);
-        } catch (IOException e) {
-            System.err.println(e.getClass().getSimpleName() + " " + e.getMessage());
-        }
+
+
+                datagramSocket.receive(datagramPacket);
+
+
+
+
 
         String data = new String(datagramPacket.getData());
         String payload = data.substring(0, datagramPacket.getLength());
@@ -67,7 +78,11 @@ public class AClient {
 
     public static void closeConnection() {
         System.out.println("closing connection");
-        datagramSocket.close();
+        commands.clear();
+        if (datagramSocket != null && datagramSocket.isConnected()) {
+            datagramSocket.close();
+            datagramSocket = null;
+        }
     }
 
 }
