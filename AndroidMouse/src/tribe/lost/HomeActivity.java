@@ -1,12 +1,13 @@
 package tribe.lost;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.MotionEvent;
-import android.view.View;
+import android.view.*;
 import android.widget.AutoCompleteTextView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.IOException;
 
@@ -15,6 +16,35 @@ public class HomeActivity extends Activity {
     private static String TAG = HomeActivity.class.getSimpleName();
     private static Thread receiver, executer;
     boolean isConnected = false;
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.main, menu);
+        // Calling super after populating the menu is necessary here to ensure that the
+        // action bar helpers have a chance to handle this event.
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                Toast.makeText(this, "Tapped home", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.menu_search:
+                Toast.makeText(this, "Tapped search", Toast.LENGTH_SHORT).show();
+                break;
+
+            case R.id.menu_settings:
+                Toast.makeText(this, "Tapped share", Toast.LENGTH_SHORT).show();
+                Intent i = new Intent(this,SettingsActivity.class);
+                startActivity(i);
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
 
     /**
@@ -37,15 +67,15 @@ public class HomeActivity extends Activity {
     public void onResume() {
         super.onResume();
         Log.d(TAG, "onResume");
-        int port = AClientServerInterface.PORT;
-        AClient.connectIfNotConnected("10.19.210.26", port);
-        isConnected = true;
         startThreads();
     }
 
     private void startThreads() {
         receiver = new Thread(new Runnable() {
             public void run() {
+                int port = AClientServerInterface.PORT;
+                AClient.connectIfNotConnected("10.19.210.26", port);
+                isConnected = true;
                 while (isConnected) {
                     System.out.println("waiting for response... ");
 
@@ -82,6 +112,7 @@ public class HomeActivity extends Activity {
                     }
                 }
                 Log.d(TAG, "executer finished");
+                AClient.closeConnection();
             }
         });
         executer.start();
@@ -92,7 +123,6 @@ public class HomeActivity extends Activity {
         super.onPause();
         Log.d(TAG, "onPause");
         stopThreads();
-        AClient.closeConnection();
     }
 
     private void stopThreads() {
