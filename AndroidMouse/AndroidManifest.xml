@@ -12,7 +12,7 @@
             </intent-filter>
         </activity>
         <activity android:name="SettingsActivity"
-                  android:label="Settings">
+                  android:label="JAM Settings">
         </activity>
     </application>
     <uses-permission android:name="android.permission.INTERNET"/>

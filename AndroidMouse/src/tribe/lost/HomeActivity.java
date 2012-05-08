@@ -2,6 +2,7 @@ package tribe.lost;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.*;
@@ -31,14 +32,14 @@ public class HomeActivity extends Activity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                Toast.makeText(this, "Tapped home", Toast.LENGTH_SHORT).show();
-                break;
+                //Toast.makeText(this, "Tapped home", Toast.LENGTH_SHORT).show();
+                //break;
+            /*
             case R.id.menu_search:
                 Toast.makeText(this, "Tapped search", Toast.LENGTH_SHORT).show();
-                break;
-
+                break;  */
             case R.id.menu_settings:
-                Toast.makeText(this, "Tapped share", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this, "Tapped share", Toast.LENGTH_SHORT).show();
                 Intent i = new Intent(this,SettingsActivity.class);
                 startActivity(i);
                 break;
@@ -73,8 +74,13 @@ public class HomeActivity extends Activity {
     private void startThreads() {
         receiver = new Thread(new Runnable() {
             public void run() {
-                int port = AClientServerInterface.PORT;
-                AClient.connectIfNotConnected("10.19.210.26", port);
+                //int port = AClientServerInterface.PORT;
+
+                final SharedPreferences prefs = HomeActivity.this.getSharedPreferences("settings", MODE_PRIVATE);
+                String ip = prefs.getString("ip",null);
+                int port = prefs.getInt("port",AClientServerInterface.PORT);
+                Log.d(TAG,"ip:port"+ip+":"+port);
+                AClient.connectIfNotConnected(ip, port);
                 isConnected = true;
                 while (isConnected) {
                     System.out.println("waiting for response... ");
