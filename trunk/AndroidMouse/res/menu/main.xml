@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/menu_search"
+    <!--<item android:id="@+id/menu_search"
           android:title="test"
           android:icon="@drawable/ic_launcher"
           android:orderInCategory="0"
-          android:showAsAction="always" />
-
+          android:showAsAction="always" />  -->
     <item android:id="@+id/menu_settings"
-          android:title="settings"
+          android:title="JAM settings"
           android:icon="@drawable/ic_launcher"
-          android:orderInCategory="1"
+          android:orderInCategory="0"
           android:showAsAction="always"/>
 </menu>
