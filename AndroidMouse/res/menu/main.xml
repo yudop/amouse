@@ -8,7 +8,7 @@
           android:showAsAction="always" />  -->
     <item android:id="@+id/menu_settings"
           android:title="JAM settings"
-          android:icon="@drawable/ic_launcher"
+          android:icon="@drawable/settings"
           android:orderInCategory="0"
           android:showAsAction="always"/>
 </menu>
