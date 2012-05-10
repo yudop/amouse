@@ -77,23 +77,31 @@ public class HomeActivity extends Activity {
                 //int port = AClientServerInterface.PORT;
 
                 final SharedPreferences prefs = HomeActivity.this.getSharedPreferences("settings", MODE_PRIVATE);
-                String ip = prefs.getString("ip",null);
-                int port = prefs.getInt("port",AClientServerInterface.PORT);
+                final String ip = prefs.getString("ip",null);
+                final int port = prefs.getInt("port",AClientServerInterface.PORT);
                 Log.d(TAG,"ip:port"+ip+":"+port);
                 AClient.connectIfNotConnected(ip, port);
+                AClient.putCommandOnQueue(AClientServerInterface.STATE_HANDSHAKE);
                 isConnected = true;
                 while (isConnected) {
-                    System.out.println("waiting for response... ");
+                    Log.d(TAG,"waiting for response... ");
 
                     final String response;
                     try {
                         response = AClient.receiveResponse();
-
+                        Log.d(TAG,"response "+response);
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
                                 TextView view = (TextView) findViewById(R.id.response_field);
-                                view.setText(response);
+                                if (AClientServerInterface.STATE_HANDSHAKE.equals(response)) {
+                                    Log.d(TAG,"connected to "+ip+":"+port);
+                                    view.setText("Connected");
+                                } else {
+                                
+                               
+                                    view.setText(response);
+                                }
                             }
                         });
                     } catch (IOException e) {

@@ -1,5 +1,7 @@
 package tribe.lost;
 
+import android.util.Log;
+
 import java.io.IOException;
 import java.net.*;
 import java.util.concurrent.BlockingQueue;
@@ -30,18 +32,29 @@ public class AClient {
             inetAddress = InetAddress.getByName(ipAddress);
         } catch (UnknownHostException e) {
             System.err.println(e.getClass().getSimpleName() + " " + e.getMessage());
-            System.exit(-1);
+            //System.exit(-1);
         }
         try {
             datagramSocket = new DatagramSocket();
             datagramSocket.connect(inetAddress, port);
+
         } catch (SocketException e) {
             System.err.println(e.getClass().getSimpleName() + " " + e.getMessage());
-            System.exit(-1);
+            //System.exit(-1);
         }
+        
+
 
         //byte[] buf = new byte[AClientServerInterface.PACKET_LENGTH];
         //datagramPacket = new DatagramPacket(buf, buf.length);
+    }
+
+    public static void putCommandOnQueue(String command) {
+        try {
+            AClient.commands.put(command);
+        } catch (InterruptedException e) {
+            Log.e(TAG, "InterruptedException " + e.getMessage());
+        }
     }
 
     public static void sendPayload(String payload) {
@@ -81,7 +94,7 @@ public class AClient {
         commands.clear();
         if (datagramSocket != null && datagramSocket.isConnected()) {
             datagramSocket.close();
-            datagramSocket = null;
+            //datagramSocket = null;
         }
     }
 

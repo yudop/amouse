@@ -57,7 +57,7 @@ public class SettingsActivity extends Activity {
 
         prefs = SettingsActivity.this.getSharedPreferences("settings", MODE_PRIVATE);
 
-        String ip = prefs.getString("ip",null);
+        String ip = prefs.getString("ip",AClientServerInterface.IP);
         int port = prefs.getInt("port",AClientServerInterface.PORT);
         TextView textView = (TextView) findViewById(R.id.ip_address);
         textView.setText(ip);

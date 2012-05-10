@@ -4,7 +4,7 @@ package tribe.lost;
  * Created by Tobias Ericsson
  */
 public interface AClientServerInterface {
-
+    String IP = "127.0.0.1";
     int PORT = 8888;
     int PACKET_LENGTH = 128;
     String ERROR = "ERROR";
@@ -16,6 +16,7 @@ public interface AClientServerInterface {
     String STATE_KEY_PRESS = "KEY";
     String STATE_MOUSE_CLICK = "MOUSE_CLICK";
     String STATE_MOUSE_MOVE = "MOUSE_MOVE";
+    String STATE_HANDSHAKE = "HAND_SHAKE";
 
     //example payload: KEY;;a;;b;;c::WINAMP;;2;;3;;3::WIZMO;;0
     // MOUSE_MOVE;;120;;33::MOUSE_CLICK;;BUTTON_UP_LEFT::
