@@ -41,7 +41,7 @@ public class MouseHandler {
         currentY = point.y + dy;
         //currentX = currentX + dx;
         //currentY = currentY + dy;
-        System.out.println("x,y: "+currentX+","+currentY);
+        //System.out.println("x,y: "+currentX+","+currentY);
         robot.mouseMove(currentX, currentY);
     }
 
