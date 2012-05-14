@@ -30,20 +30,20 @@ public class MouseOnTouchListener implements View.OnTouchListener {
 
     private void handleMotionEvent(MotionEvent motionEvent) {
         int action = motionEvent.getAction();
-        Log.d(TAG, "motion " + motionEvent.getAction());
+        //Log.d(TAG, "motion " + motionEvent.getAction());
         if (action == MotionEvent.ACTION_DOWN) {
-            Log.d(TAG, "DOWN!!");
+            //Log.d(TAG, "DOWN!!");
             oldX = motionEvent.getX();
             oldY = motionEvent.getY();
             startX = oldX;
             startY = oldY;
             startTime = System.currentTimeMillis();
-            putCommandOnQueue("MOUSE_CLICK;;" + AClientServerInterface.MOUSE.BUTTON_DOWN_RIGHT);
+            //putCommandOnQueue("MOUSE_CLICK;;" + AClientServerInterface.MOUSE.BUTTON_DOWN_RIGHT);
 
         }
 
         if (action == MotionEvent.ACTION_UP) {
-            Log.d(TAG, "CLEAR!!");
+            //Log.d(TAG, "CLEAR!!");
             //client.commands.clear();
             ifClickClick(motionEvent);
 
@@ -58,18 +58,21 @@ public class MouseOnTouchListener implements View.OnTouchListener {
             final int pointerCount = motionEvent.getPointerCount();
             for (int h = 0; h < historySize; h++) {
                 for (int p = 0; p < pointerCount; p++) {
-                    //Log.d(TAG, "historical x,y: " + motionEvent.getHistoricalX(p, h) + "," + motionEvent.getHistoricalY(p, h));
+                    Log.d(TAG, "historical x,y: " + motionEvent.getHistoricalX(p, h) + "," + motionEvent.getHistoricalY(p, h));
                     x = motionEvent.getHistoricalX(p, h);
                     y = motionEvent.getHistoricalY(p, h);
                     mouseMove(x, y);
+
                 }
             }
-            Log.d(TAG, "At time %d:" + motionEvent.getEventTime());
+            //Log.d(TAG, "At time %d:" + motionEvent.getEventTime());
             for (int p = 0; p < pointerCount; p++) {
-                //Log.d(TAG, "x,y: " + motionEvent.getX(p) + ":" + motionEvent.getY(p));
+                Log.d(TAG, p+" x,y: " + motionEvent.getX(p) + ":" + motionEvent.getY(p));
+
                 x = motionEvent.getX(p);
                 y = motionEvent.getY(p);
                 mouseMove(x, y);
+
             }
 
             //Log.d(TAG, "final x,y: " + x + "," + y);
@@ -84,7 +87,7 @@ public class MouseOnTouchListener implements View.OnTouchListener {
 
         float diffX = (startX - x) * (startX - x);
         float diffY = (startY - y) * (startY - y);
-        Log.d(TAG, "diff " + diffX);
+        //Log.d(TAG, "diff " + diffX);
         if (diffX < 15 && diffY < 15) {
             if (upTime - startTime < 500) {
                 Log.d(TAG, "clicked fast");
@@ -103,24 +106,24 @@ public class MouseOnTouchListener implements View.OnTouchListener {
 
         float dx = x - oldX;
         float dy = y - oldY;
-        float diffX = (dx) * (dx);
-        float diffY = (dy) * (dy);
-        Log.d(TAG, "mouseMove diff: "+diffX);
-        if (diffX >= 0.1 && diffY >= 0.1) {
-            putCommandOnQueue("MOUSE_MOVE" + ";;" + addSensitivity(8, dx) + ";;" + addSensitivity(8, dy));
+        //float diffX = (dx) * (dx);
+        //float diffY = (dy) * (dy);
+        Log.d(TAG, "mouseMove diff: "+"  "+":"+dx+"    :"+dy);
+
+            putCommandOnQueue("MOUSE_MOVE" + ";;" + addSensitivity(2.0f, dx) + ";;" + addSensitivity(2.0f, dy));
             oldX = x;
             oldY = y;
-        }
+
     }
 
-    private int addSensitivity(int sensitivity, float xy) {
+    private int addSensitivity(float sensitivity, float xy) {
         /*
         if (xy>sensitivity) {
             return 10;
         } else {
             return -10;
         } */
-        return Math.round(xy * sensitivity);
+        return (int) Math.round(xy*sensitivity);
     }
 
     private void putCommandOnQueue(String command) {

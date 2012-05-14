@@ -17,7 +17,7 @@ public class AClient {
     //private static DatagramPacket datagramPacket;
     private static InetAddress inetAddress;
     private static int port;
-
+    private static boolean connected = false;
 
     public static void connectIfNotConnected(String ipAddress, int port) {
         if (datagramSocket == null || !datagramSocket.isConnected()) {
@@ -25,25 +25,51 @@ public class AClient {
         }
     }
 
-    public static void connect(String ipAddress, int port) {
-        System.out.println("connecting to port " + port);
+    public static boolean connect(String ipAddress, int port) {
         AClient.port = port;
         try {
             inetAddress = InetAddress.getByName(ipAddress);
         } catch (UnknownHostException e) {
-            System.err.println(e.getClass().getSimpleName() + " " + e.getMessage());
-            //System.exit(-1);
+            Log.e(TAG,e.getClass().getSimpleName() + " " + e.getMessage());
+            return false;
         }
         try {
             datagramSocket = new DatagramSocket();
             datagramSocket.connect(inetAddress, port);
 
-        } catch (SocketException e) {
-            System.err.println(e.getClass().getSimpleName() + " " + e.getMessage());
-            //System.exit(-1);
-        }
-        
 
+            connected = false;
+            Thread thread = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        Log.d(TAG, "waiting for handshake response... ");
+                        receiveResponse();
+                        Log.d(TAG, "got handshake = connected");
+                        connected = true;
+                    } catch (IOException e) {
+                        Log.e(TAG,e.getClass().getSimpleName() + " " + e.getMessage());
+                    }
+                }
+            });
+            thread.start();
+
+            int k = 0;
+            while (k<3 && !connected) {
+                sendPayload(AClientServerInterface.STATE_HANDSHAKE);
+                try {
+                    Thread.sleep(2000);
+                    k++;
+                } catch (InterruptedException e) {
+                    Log.e(TAG,e.getClass().getSimpleName() + " " + e.getMessage());
+                }
+            }
+        } catch (SocketException e) {
+            Log.e(TAG,e.getClass().getSimpleName() + " " + e.getMessage());
+            return false;
+        }
+
+        return connected;
 
         //byte[] buf = new byte[AClientServerInterface.PACKET_LENGTH];
         //datagramPacket = new DatagramPacket(buf, buf.length);
@@ -58,7 +84,7 @@ public class AClient {
     }
 
     public static void sendPayload(String payload) {
-        System.out.println("sending payload: " + payload);
+        Log.d(TAG,"sending payload: " + payload);
         byte[] buffer = payload.getBytes();
         DatagramPacket datagramPacket = new DatagramPacket(buffer, buffer.length, inetAddress, port);
         try {
@@ -66,8 +92,8 @@ public class AClient {
                 datagramSocket.send(datagramPacket);
 
         } catch (IOException e) {
-            System.err.println(e.getClass().getSimpleName() + " " + e.getMessage());
-            System.exit(-1);
+            Log.i(TAG,e.getClass().getSimpleName() + " " + e.getMessage());
+            //System.exit(-1);
         }
     }
 
@@ -85,15 +111,18 @@ public class AClient {
 
         String data = new String(datagramPacket.getData());
         String payload = data.substring(0, datagramPacket.getLength());
-        System.out.println("payload received: " + payload);
+        Log.d(TAG,"payload received: " + payload);
         return payload;
     }
 
     public static void closeConnection() {
-        System.out.println("closing connection");
+        Log.d(TAG,"closing connection");
         commands.clear();
-        if (datagramSocket != null && datagramSocket.isConnected()) {
+
+        if (datagramSocket != null) {
+            AClient.sendPayload(AClientServerInterface.STATE_CLOSING);
             datagramSocket.close();
+            datagramSocket.disconnect();
             //datagramSocket = null;
         }
     }
