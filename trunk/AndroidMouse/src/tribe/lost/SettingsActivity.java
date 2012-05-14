@@ -1,5 +1,6 @@
 package tribe.lost;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -54,6 +55,9 @@ public class SettingsActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.settings);
+        final ActionBar actionBar = getActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setSubtitle("just another mouse");
 
         prefs = SettingsActivity.this.getSharedPreferences("settings", MODE_PRIVATE);
 
@@ -73,6 +77,7 @@ public class SettingsActivity extends Activity {
                 textView = (TextView) findViewById(R.id.port);
                 String port = textView.getText().toString();
                 prefs.edit().putString("ip", ip).putInt("port", Integer.parseInt(port)).commit();
+                actionBar.setSubtitle("settings saved");
                 Toast.makeText(SettingsActivity.this, "Settings saved!", Toast.LENGTH_SHORT).show();
 
             }

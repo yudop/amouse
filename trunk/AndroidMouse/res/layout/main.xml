@@ -3,20 +3,26 @@
               android:orientation="vertical"
               android:layout_width="fill_parent"
               android:layout_height="fill_parent"
-              android:id="@+id/touch_area">
-
-    <AutoCompleteTextView android:layout_width="fill_parent"
+              android:id="@+id/touch_area" android:padding="10dip">
+    <LinearLayout android:layout_height="wrap_content" android:layout_width="fill_parent" android:weightSum="4"
+                  android:orientation="horizontal" >
+    <AutoCompleteTextView android:layout_width="wrap_content" android:layout_weight="4"
                           android:layout_height="wrap_content"
                           android:text=""
                           android:inputType="text"
                           android:cursorVisible="false"
-                          android:id="@+id/key_input" android:layout_marginLeft="10dp" android:layout_marginRight="10dp" />
-    <TextView android:layout_margin="10dp"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text=""
-            android:id="@+id/response_field"
-            android:textColor="#ffffffff"
-            />
+                          android:id="@+id/key_input" android:layout_marginRight="10dp" />
+        <Button android:id="@+id/button_delete" android:layout_height="wrap_content" android:layout_width="wrap_content"
+                android:text="DELETE" android:layout_weight="1"/>
+    </LinearLayout>
+    <LinearLayout android:layout_height="wrap_content" android:layout_width="fill_parent" android:weightSum="3"
+                   >
+        <Button android:id="@+id/button_left" android:layout_height="wrap_content" android:layout_width="wrap_content"
+                android:text="LEFT" android:layout_weight="1"/>
+        <Button android:id="@+id/button_middle" android:layout_height="wrap_content" android:layout_width="wrap_content"
+                android:text="MIDDLE" android:layout_weight="1"/>
+        <Button android:id="@+id/button_right" android:layout_height="wrap_content" android:layout_width="wrap_content"
+                android:text="RIGHT" android:layout_weight="1"/>
+    </LinearLayout>
 </LinearLayout>
 
