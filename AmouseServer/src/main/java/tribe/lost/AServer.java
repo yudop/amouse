@@ -1,7 +1,5 @@
 package tribe.lost;
 
-import sun.java2d.pipe.BufferedTextPipe;
-import tribe.lost.MouseHandler;
 
 import java.io.IOException;
 import java.net.DatagramPacket;
@@ -23,11 +21,9 @@ public class AServer {
     private static String SERVER_ERROR = "SERVER ERROR: ";
 
     private DatagramSocket datagramSocket;
-    //private final DatagramPacket datagramPacketIncoming;
     public BlockingQueue<String> responses = new LinkedBlockingQueue<String>();
     private static InetAddress clientAddress;
     private static int clientPort;
-    private String state;
 
     public AServer(int port) {
         try {
@@ -78,7 +74,7 @@ public class AServer {
 
             String response = executeCommands(payload);
             responses.offer(response);
-            System.out.println("executed " + response);
+            //System.out.println("executed " + response);
             //sendResponse(response);
         }
     }
@@ -116,6 +112,14 @@ public class AServer {
             if (AClientServerInterface.STATE_MOUSE_MOVE.equals(subCommands[0])) {
                 response = MouseHandler.handleMove(subCommands);
 
+            }
+            
+            if (AClientServerInterface.STATE_HANDSHAKE.equals(subCommands[0])) {
+                response = "connected";
+            }
+
+            if (AClientServerInterface.STATE_DELETE_PRESS.equals(subCommands[0])) {
+                response = KeyPressHandler.delete();
             }
 
 

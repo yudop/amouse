@@ -43,6 +43,9 @@ public class MouseHandler {
 
     public static String handleClick(String[] command) {
         int click = Integer.parseInt(command[1]);
+        Point point = MouseInfo.getPointerInfo().getLocation();
+        currentX=point.x;
+        currentY=point.y;
         switch (click) {
             case MOUSE.BUTTON_DOWN_LEFT:
                 //robot.mousePress(InputEvent.BUTTON1_MASK);
@@ -50,20 +53,20 @@ public class MouseHandler {
             case MOUSE.BUTTON_UP_LEFT:
                 robot.mousePress(InputEvent.BUTTON1_MASK);
                 robot.mouseRelease(InputEvent.BUTTON1_MASK);
-                break;
+                return "left button";
             case MOUSE.BUTTON_DOWN_MIDDLE:
-                robot.mousePress(InputEvent.BUTTON2_MASK);
+                //robot.mousePress(InputEvent.BUTTON2_MASK);
                 break;
             case MOUSE.BUTTON_UP_MIDDLE:
                 robot.mouseRelease(InputEvent.BUTTON2_MASK);
-                break;
+                return "middle button";
             case MOUSE.BUTTON_DOWN_RIGHT:
                 //robot.mousePress(InputEvent.BUTTON3_MASK);
                 break;
             case MOUSE.BUTTON_UP_RIGHT:
                 robot.mousePress(InputEvent.BUTTON3_MASK);
                 robot.mouseRelease(InputEvent.BUTTON3_MASK);
-                break;
+                return "right button";
         }
         return "clicked "+click;
     }
@@ -73,7 +76,7 @@ public class MouseHandler {
         //Point point = MouseInfo.getPointerInfo().getLocation();
         currentX = currentX + dx;
         currentY = currentY + dy;
-        System.out.println("x,y: " + currentX + "," + currentY);
+        //System.out.println("x,y: " + currentX + "," + currentY);
         robot.mouseMove(currentX, currentY);
     }
 
