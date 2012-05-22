@@ -27,8 +27,30 @@
 <body>
 <script type="text/javascript">
 	
-	$(function() {
+	function showCloud() {
+			$( "#cloud" ).toggle();
+			
+			moveCloudLeft();
+		};
 	
+	function moveCloudLeft() {
+		$("#cloud").animate({
+				marginLeft: "-1450px"
+			}, {
+				duration: 30000,
+				easing: "easeOutSine",
+				complete: moveCloudRight,
+			});		
+	}
+	
+	function moveCloudRight() {
+		$( "#cloud" ).css({"margin-left":"-0px"});
+		moveCloudLeft();
+	}
+	
+	
+	$(function() {
+		$( "#cloud" ).hide();
 	   
 		/*
 		var theSquare = $('#blog'); 
@@ -92,31 +114,52 @@
 	
 	
 </script>
-<center>
+
 <div id="test"><h1>Welcome</h1></div>
-<div id="centerbox">
-<div id="air">
-	<div class="block_container">
-		<a href="http://tobias-ericsson.appspot.com/me/" ><img id="home" class="falling" src="home_winter_128.png" /></a>
+
+
+
+
+<table><tr>
+	<td style="width:45%">
+	<div class="border"><h1>Welcome</h1></div>
+	</td>
+	<td>
+	<div id="centerbox">
+		<div id="air">
+			<div class="block_container">
+				<a href="http://tobias-ericsson.appspot.com/me/" ><img id="home" class="falling" src="home_winter_128.png" /></a>
+			</div>
+			<div class="block_container">
+				<a href="http://tobias-ericsson.appspot.com/me/" ><img id="blog" class="falling" src="blog_128.png" class="ui-widget-content" /></a>
+			</div>
+			<div class="block_container">
+				<a href="#" ><img id="html5" class="falling" src="html5_128.png" class="ui-widget-content" /></a>
+			</div>
+			<div class="block_container">
+				<a href="#" ><img id="downloads" class="falling" src="downloads_crop_128.png" /></a>
+			</div>
+			<div class="block_container">
+				<a href="#" onClick="showCloud()" ><img id="app_engine" class="falling" src="app_engine_crop_128.png" /></a>
+			</div>
+			<div class="block_container">
+				<a href="http://tionit.blogspot.se/search/label/Android" ><img id="android" class="falling" src="android_128.png" /></a>
+			</div>
+		</div>
+		<div id="ground">&nbsp;</div>
 	</div>
-	<div class="block_container">
-		<a href="http://tobias-ericsson.appspot.com/me/" ><img id="blog" class="falling" src="blog_128.png" class="ui-widget-content" /></a>
-	</div>
-	<div class="block_container">
-		<a href="#" ><img id="html5" class="falling" src="html5_128.png" class="ui-widget-content" /></a>
-	</div>
-	<div class="block_container">
-		<a href="#" ><img id="downloads" class="falling" src="downloads_crop_128.png" /></a>
-	</div>
-	<div class="block_container">
-		<a href="#" ><img id="app_engine" class="falling" src="app_engine_crop_128.png" /></a>
-	</div>
-	<div class="block_container">
-		<a href="http://tionit.blogspot.se/search/label/Android" ><img id="android" class="falling" src="android_128.png" /></a>
-	</div>
+	</td>
+	<td style="width:45%">
+		<div class="border"><h1>Welcome</h1></div>
+	</td>
+</tr></table>
+
+<div id="cloud">
+<h3>My Applications on App-Engine</h3>
+<p><a href="http://1.tobias-ericsson.appspot.com/" >http://tobias-ericsson.appspot.com</a></p>
+<p><a href="http://tericsson.appspot.com/" >http://tericsson.appspot.com</a></p>
+<p><a href="http://malmomat.appspot.com/lunch" >http://malmomat.appspot.com/lunch</a></p>
 </div>
-<div id="ground">&nbsp;</div>
-</div>
-</center>
+
 </body>
 </html>

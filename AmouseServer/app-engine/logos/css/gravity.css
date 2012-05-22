@@ -24,8 +24,8 @@ body {
 }*/
 
 #air {
-	height: 500px;
-	padding-top: 20px;
+	height: 570px;
+	/*padding-top: 20px;*/
 	background-color: #B4D7F4;
 	
 }
@@ -45,18 +45,60 @@ body {
 }
 
 #centerbox {
-	position: absolute;
-	left: 50%;
-	margin-left:-440px;
+	
 	width: 876px;
 }
 
 #test {
 	position: absolute;
-	left: 50%;
-	margin-left:-440px;
-	width: 876px;
+	width: 100%;
 	padding: 12px;
 	background-color: white;
 	z-index:200;
+	text-align: center;
+}
+
+#cloud {
+	/*border:5px solid red;*/
+	position: absolute;
+	left: 62%;
+	top: 80px;
+	margin-left:0px;
+	width: 619px;
+	height: 400px;
+	/*background-color: green;*/
+	background-image: url("../cloud_400.png");
+	z-index:10;
+	vertical-align:middle;
+	text-align:center;
+}
+#cloud h3 {
+	margin-top:100px;
+}
+#cloud a {
+	text-decoration: none;
+	color: #5F3800;
+}
+
+table {
+	height: 100%;
+	width: 100%;
+	padding:0px;
+	margin:0px;
+	border: none;
+}
+
+tr,td {
+	padding: 0px;
+	margin: 0px;
+	border: none;
+}
+
+
+.border {	
+	position: relative;
+	background-color: white;
+	z-index:20;
+	height: 100%;
+	width: 100%;
 }

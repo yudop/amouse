@@ -7,7 +7,7 @@ var Gravity = {
 		});
 		
 		$(".falling").mouseenter(function(i) {
-					
+				
 			var block = $(this); //.parent().next();
 			var yposBlock = $(block).position()['top'] - $("#air").position()['top'];
 			var fallDist = ($("#air").outerHeight() - yposBlock) - $(block).outerHeight();
