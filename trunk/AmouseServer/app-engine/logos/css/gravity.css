@@ -54,7 +54,7 @@ a.selected {
 }
 
 #centerbox {
-	
+	height: 1024px;
 	width: 876px;
 }
 
@@ -95,6 +95,7 @@ table {
 	padding:0px;
 	margin:0px;
 	border: none;
+	border-spacing: 0px;
 }
 
 tr,td {
@@ -108,6 +109,24 @@ tr,td {
 	position: relative;
 	background-color: white;
 	z-index:20;
-	height: 620px;
+	height: 1024px;
 	width: 100%;
 }
+
+th.ground ,td.ground {
+	text-align: left;
+	border-right:1px solid black;
+	border-bottom:1px solid black;
+	padding: 4px;
+}
+#ground p,h3 {
+		padding: 0px;
+		margin: 0px;
+}
+
+#ground a {
+	/*text-decoration: none;*/
+	border: none;
+	color: #B4D7F4;
+}
+

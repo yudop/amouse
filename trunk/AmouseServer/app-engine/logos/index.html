@@ -27,6 +27,10 @@
 <body>
 <script type="text/javascript">
 	
+	function toggleDownloadArea() {
+			$( "#download_area" ).toggle();		
+		};	
+	
 	function showCloud() {
 			$( "#cloud" ).toggle();
 			
@@ -51,7 +55,7 @@
 	
 	$(function() {
 		$( "#cloud" ).hide();
-	   
+	    $( "#download_area" ).hide();
 		/*
 		var theSquare = $('#blog'); 
 		theSquare.click(function () {
@@ -120,9 +124,9 @@
 
 
 
-<table><tr>
+<table id="mainTable" ><tr>
 	<td style="width:45%">
-	<div class="border"><h1>Welcome</h1></div>
+	<div class="border"><h1>&nbsp;</h1></div>
 	</td>
 	<td>
 	<div id="centerbox">
@@ -137,7 +141,7 @@
 				<a href="#" ><img id="html5" class="falling" src="html5_128.png" class="ui-widget-content" /></a>
 			</div>
 			<div class="block_container">
-				<a href="#" ><img id="downloads" class="falling" src="downloads_crop_128.png" /></a>
+				<a href="#" onClick="toggleDownloadArea()" ><img id="downloads" class="falling" src="downloads_crop_128.png" /></a>
 			</div>
 			<div class="block_container">
 				<a href="#" onClick="showCloud()" ><img id="app_engine" class="falling" src="app_engine_crop_128.png" /></a>
@@ -146,11 +150,27 @@
 				<a href="http://tionit.blogspot.se/search/label/Android" ><img id="android" class="falling" src="android_128.png" /></a>
 			</div>
 		</div>
-		<div id="ground">&nbsp;</div>
+		<div id="ground">		
+			<div id="download_area" >
+				<h3>Just Another Mouse</h3>
+				<p>An Android app to remote control the computer via WIFI</p>
+				<table>
+					<tr>
+						<th class="ground">File</th><th class="ground">Version</th><th class="ground">Size</th>
+					</tr><tr>
+						<td class="ground"><a href="http://1.tobias-ericsson.appspot.com/" >JAM_ALL.zip</a></td><td class="ground">1</td><td class="ground">3Mb</td>
+					</tr><tr>	
+						<td class="ground"><a href="http://1.tobias-ericsson.appspot.com/" >JAM_android.apk</a></td><td class="ground">1</td><td class="ground">1.5Mb</td>
+					</tr><tr>
+						<td class="ground"><a href="http://1.tobias-ericsson.appspot.com/" >JAM_server.jar</a></td><td class="ground">1</td><td class="ground">1.0Mb</td>
+					</tr><tr>
+				</table>
+			</div>
+		</div>
 	</div>
 	</td>
 	<td style="width:45%">
-		<div class="border"><h1>Welcome</h1></div>
+		<div class="border"><h1>&nbsp;</h1></div>
 	</td>
 </tr></table>
 
@@ -160,6 +180,8 @@
 <p><a href="http://tericsson.appspot.com/" >http://tericsson.appspot.com</a></p>
 <p><a href="http://malmomat.appspot.com/lunch" >http://malmomat.appspot.com/lunch</a></p>
 </div>
+
+
 
 </body>
 </html>
