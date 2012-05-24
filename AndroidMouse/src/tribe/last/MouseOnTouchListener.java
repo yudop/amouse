@@ -5,11 +5,7 @@ import android.view.MotionEvent;
 import android.view.View;
 
 /**
- * Created by IntelliJ IDEA.
- * User: TOER
- * Date: 2012-05-02
- * Time: 09:29
- * To change this template use File | Settings | File Templates.
+ * Created by Tobias Ericsson
  */
 public class MouseOnTouchListener implements View.OnTouchListener {
 
