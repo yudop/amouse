@@ -77,21 +77,37 @@ public class KeyPressHandler {
                         robot.keyPress(KeyEvent.VK_BACK_SLASH);
                         robot.keyRelease(KeyEvent.VK_BACK_SLASH);
                         break;
-                    case '?':
-                        robot.keyPress(KeyEvent.VK_2);
-                        robot.keyRelease(KeyEvent.VK_2);
+                    case '$':
+                        robot.keyPress(KeyEvent.VK_DOLLAR);
+                        robot.keyRelease(KeyEvent.VK_DOLLAR);
                         break;
-                    case '&':
-                        robot.keyPress(KeyEvent.VK_2);
-                        robot.keyRelease(KeyEvent.VK_2);
+                    case '=':
+                        robot.keyPress(KeyEvent.VK_EQUALS);
+                        robot.keyRelease(KeyEvent.VK_EQUALS);
                         break;
-                    case '%':
-                        robot.keyPress(KeyEvent.VK_2);
-                        robot.keyRelease(KeyEvent.VK_2);
+                    case ' ':
+                        robot.keyPress(KeyEvent.VK_SPACE);
+                        robot.keyRelease(KeyEvent.VK_SPACE);
                         break;
-                    case '#':
-                        robot.keyPress(KeyEvent.VK_2);
-                        robot.keyRelease(KeyEvent.VK_2);
+                    case '>':
+                        robot.keyPress(KeyEvent.VK_A);
+                        robot.keyRelease(KeyEvent.VK_A);
+                        break;
+                    case '<':
+                        robot.keyPress(KeyEvent.VK_A);
+                        robot.keyRelease(KeyEvent.VK_A);
+                        break;
+                    case '*':
+                        robot.keyPress(KeyEvent.VK_MULTIPLY);
+                        robot.keyRelease(KeyEvent.VK_MULTIPLY);
+                        break;
+                    case '+':
+                        robot.keyPress(KeyEvent.VK_PLUS);
+                        robot.keyRelease(KeyEvent.VK_PLUS);
+                        break;
+                    case '-':
+                        robot.keyPress(KeyEvent.VK_MINUS);
+                        robot.keyRelease(KeyEvent.VK_MINUS);
                         break;
                     case '.':
                         robot.keyPress(KeyEvent.VK_PERIOD);
