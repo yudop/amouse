@@ -2,12 +2,8 @@ package tribe.last;
 
 import android.util.Log;
 import android.view.View;
-
 /**
- * Created by IntelliJ IDEA.
- * User: TOER
- * Date: 2012-05-14
- * Time: 14:49
+ * Created by Tobias Ericsson
  */
 public class MouseOnClickListener implements View.OnClickListener {
 

@@ -11,11 +11,7 @@ import android.view.View;
 import android.widget.*;
 
 /**
- * Created by IntelliJ IDEA.
- * User: TOER
- * Date: 2012-05-04
- * Time: 13:15
- * To change this template use File | Settings | File Templates.
+ * Created by Tobias Ericsson
  */
 public class SettingsActivity extends Activity {
 

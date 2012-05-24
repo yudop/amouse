@@ -26,7 +26,7 @@ public class KeyViewOnKeyListener implements View.OnKeyListener {
                     AClient.commands.add(command + text);
                     break;
                 case 67:
-                    AClient.commands.add(command + "ALT" + 127 + "ALT");
+                    //AClient.commands.add(command + "ALT" + 127 + "ALT");
                     break;
             }
         }
