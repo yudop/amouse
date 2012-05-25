@@ -1,4 +1,4 @@
-package tribe.lost;
+package tribe.last;
 
 import junit.framework.TestCase;
 
