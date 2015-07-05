@@ -1,0 +1,1 @@
+An android client that sends commands to a java-server that moves the mouse
